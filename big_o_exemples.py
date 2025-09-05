@@ -1,5 +1,6 @@
 # secção do big O
 from utils import run_timeit
+import itertools
 
 
 def func_constant(values: list) -> None:
@@ -47,6 +48,26 @@ def printer(n: int) -> None:
         print("hello word")
 
 
+def power_set(nums):
+    """
+    Exemple O(2^n)
+    """
+    subsets = [[]]
+    for num in nums:
+        # for each existing subset, add the current number
+        subsets += [s + [num] for s in subsets]
+    return subsets
+
+
+
+def generate_permutations(arr):
+    """
+    Exemple 2! (calculate permutation)
+    """
+
+    return list(itertools.permutations(arr))
+
+
 if __name__ == '__main__':
     values: list = [1, 2, 3, 4, 5, 6]
 
@@ -58,3 +79,9 @@ if __name__ == '__main__':
     run_timeit(matcher, values, 1, number=1)
     # O(n)
     run_timeit(matcher, values, 11, number=1)
+
+    # O(2^n)
+    run_timeit(power_set, [1, 2, 3], number=1)
+
+    # O(n!)
+    run_timeit(generate_permutations, [1, 2, 3], number=1)
